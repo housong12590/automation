@@ -155,7 +155,6 @@ def run_container():
     else:
         container_name = image_name
     global command
-    print(command)
     cmds = [
         'docker login {} -u {} -p {}'.format(registry, harbor_user, harbor_pwd),
         'docker rm -f {}'.format(container_name),
@@ -165,6 +164,7 @@ def run_container():
     ]
     if ssh_host is None:
         for cmd in cmds:
+            print(cmd)
             os.system(cmd)
     else:
         ssh_login(cmds)
