@@ -102,8 +102,9 @@ def parse_args(argv):
                 is_run = True
             elif o == '-w':
                 registry = '192.168.0.210'
-        if image_name is None:
-            raise Exception('image name is null, use -i or --image==xxx/xxx ...............')
+        if is_build is True:
+            if image_name is None:
+                raise Exception('image name is null, use -i or --image==xxx/xxx ...............')
         handle_run_command()
         # 构建并推送镜像
         if is_build:
