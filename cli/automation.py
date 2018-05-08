@@ -159,7 +159,7 @@ def run_container():
     cmds = [
         'docker login {} -u {} -p {}'.format(registry, harbor_user, harbor_pwd),
         'docker rm -f {}'.format(container_name),
-        'docker rmi -f {}'.format(image_name),
+        'docker rmi -f {}/{}'.format(registry, image_name),
         'docker pull {}/{}'.format(registry, image_name),
         re.sub(r"\s{2,}", " ", command)
     ]
