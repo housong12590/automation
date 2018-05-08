@@ -37,7 +37,7 @@ cmd和config 只需要一个就可以了,如果两个都添加,优先使用cmd�
 image_name = None
 dockerfile = '.'
 
-registry = '192.168.0.210'
+registry = 'registry.jiankanghao.net'
 
 image_tag = datetime.datetime.now().strftime("%Y%m%d%H%S%M")
 clear_image = False
@@ -65,8 +65,8 @@ dd_url = 'https://oapi.dingtalk.com/robot/send?access_token={0}'.format(token)
 
 def parse_args(argv):
     global image_name, dockerfile, image_tag, pro, dev, token, send_message, clear_image, \
-        ssh_pwd, ssh_user, ssh_host, run_docker_config, command, is_build, is_run
-    short_args = 'nbrf:i:t:h:u:p:c:'
+        ssh_pwd, ssh_user, ssh_host, run_docker_config, command, is_build, is_run, registry
+    short_args = 'nbrwf:i:t:h:u:p:c:'
     long_args = ['image=', 'dockerfile=', 'tag=', 'pro=', 'dev=', 'token=', 'host=', 'user=',
                  'password=', 'config=', 'cmd=']
     try:
@@ -100,6 +100,8 @@ def parse_args(argv):
                 is_build = True
             elif o == '-r':
                 is_run = True
+            elif o == '-w':
+                registry = '192.168.0.210'
         if image_name is None:
             raise Exception('image name is null, use -i or --image==xxx/xxx ...............')
         handle_run_command()
