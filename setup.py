@@ -7,7 +7,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'automation=cil.automation:main',
+            'automation=cli.automation:main',
         ],
     }, install_requires=['paramiko', 'requests']
 )
