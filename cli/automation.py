@@ -157,10 +157,12 @@ def run_container():
     global command
     cmds = [
         'docker login {} -u {} -p {}'.format(registry, harbor_user, harbor_pwd),
-        'docker rm -f {}'.format(container_name),
+        'docker tag {0}/{1} {0}/{1}:old'.format(registry, image_name),
         'docker rmi -f {}/{}'.format(registry, image_name),
         'docker pull {}/{}'.format(registry, image_name),
-        re.sub(r"\s{2,}", " ", command)
+        'docker rm -f {}'.format(container_name),
+        re.sub(r"\s{2,}", " ", command),
+        'docker rmi -f {}/{}:old'.format(registry, image_name)
     ]
     if ssh_host is None:
         for cmd in cmds:
