@@ -190,6 +190,7 @@ def format_command(cmd):
 
 def handle_run_command():
     global command
+    print(command)
     if command:
         command = format_command(command)
     else:
