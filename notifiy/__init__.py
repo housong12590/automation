@@ -1,9 +1,10 @@
-import importlib
 from docker import config
+from .ding import Ding
+from .mail import Mail
 
 item = {
-    'ding': 'notifiy.ding.Ding',
-    'mail': 'notifiy.mail.Mail'
+    'ding': Ding,
+    'mail': Mail
 }
 
 
@@ -12,7 +13,5 @@ def send(subject, msg, **kwargs):
     to = users.split(',')
     if msg_type not in item:
         msg_type = 'ding'
-    module, cls = item.get(msg_type).rsplit('.', maxsplit=1)
-    module = importlib.import_module(module)
-    obj = getattr(module, cls)()
+    obj = item.get(msg_type)()
     obj.send(subject, msg, to, **kwargs)
