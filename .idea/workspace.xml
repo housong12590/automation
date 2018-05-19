@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="64305491-1d0b-4811-b1df-7e3b37a48c47" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/docker/cli/command.py" afterPath="$PROJECT_DIR$/docker/cli/command.py" />
-      <change beforePath="$PROJECT_DIR$/docker/cli/docker_build.py" afterPath="$PROJECT_DIR$/docker/cli/docker_build.py" />
       <change beforePath="$PROJECT_DIR$/docker/cli/docker_run.py" afterPath="$PROJECT_DIR$/docker/cli/docker_run.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +45,8 @@
       <file leaf-file-name="docker_run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker/cli/docker_run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+            <state relative-caret-position="510">
+              <caret line="30" column="65" lean-forward="false" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -392,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526740505227</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="123123">
+      <created>1526741390139</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1526741390139</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -616,8 +621,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker/cli/docker_run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+        <state relative-caret-position="510">
+          <caret line="30" column="65" lean-forward="false" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

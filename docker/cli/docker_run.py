@@ -31,14 +31,15 @@ def run():
         re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
         'docker rmi -f {}:old'.format(IMAGE)
     ]
-    if config.ENABLE_REMOTE:
-        print('start ssh login...')
-        return _ssh_login(commands)
-    else:
-        print('exec command...')
-        for index, cmd in enumerate(commands):
-            print(cmd)
-            result = run_command(cmd)
-            if index == 5 and result is False:
-                return False
-        return True
+    return True
+    # if config.ENABLE_REMOTE:
+    #     print('start ssh login...')
+    #     return _ssh_login(commands)
+    # else:
+    #     print('exec command...')
+    #     for index, cmd in enumerate(commands):
+    #         print(cmd)
+    #         result = run_command(cmd)
+    #         if index == 5 and result is False:
+    #             return False
+    #     return True
