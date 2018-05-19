@@ -11,8 +11,8 @@ def _ssh_login(commands):
     for index, cmd in enumerate(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
-        if index == 5 and stderr:
-            return False
+        # if index == 5 and stderr:
+        #     return False
     client.close()
     return True
 
