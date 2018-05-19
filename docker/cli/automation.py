@@ -98,8 +98,10 @@ def get_image_name():
         regexp = r' ([\w|\.]*?/\w+?/\w+)'
         result = re.findall(regexp, config.COMMAND)
         result = result[len(result) - 1]
-        print(result)
-        return result.split('/', maxsplit=1)[1]
+        result = result.split('/')
+        image_name = '{}/{}'.format(result[1], result[2])
+        print(image_name)
+        return image_name
     except Exception:
         raise ValueError('not find image name usage -i --image --cmd')
 

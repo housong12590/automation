@@ -99,9 +99,10 @@ def get_image_name():
         regexp = r' ([\w|\.]*?/\w+?/\w+)'
         result = re.findall(regexp, config.COMMAND)
         result = result[len(result) - 1]
+        print(result)
         return result.split('/', maxsplit=1)[1]
     except Exception:
-        raise ValueError('not find image name')
+        raise ValueError('not find image name usage -i --image --cmd')
 
 
 def check_params():
@@ -113,13 +114,9 @@ def check_params():
 
 def execute(args):
     if parse_command(args) is False:
-        raise Exception('parse command error...')
+        raise Exception('parse command error...usage help')
     if check_params() is False:
         raise Exception('required parameter missing...')
-    for i in dir(config):
-        if not i.startswith('__'):
-            value = getattr(config, i)
-            print(i, '=', value)
     if config.BUILD and build_push() is False:
         raise Exception('docker build fail...')
     if config.RUN and run() is False:
@@ -163,13 +160,9 @@ def main():
     elif 'remote' in argv:
         config.ENABLE_REMOTE = True
         argv.remove('remote')
-    print(argv)
     status = True
-    try:
-        execute(argv)
-    except Exception as e:
-        status = False
-        print(e)
+
+    execute(argv)
 
     project = config.IMAGE_NAME.split('/')[1]
     if not config.NO_SEND and (config.BUILD or config.RUN):
