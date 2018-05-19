@@ -101,7 +101,7 @@ def get_image_name():
         result = result[len(result) - 1]
         return result.split('/', maxsplit=1)[1]
     except Exception:
-        raise ValueError('not find image name')
+        raise ValueError('not find image name usage -i --image --cmd')
 
 
 def check_params():
@@ -113,7 +113,7 @@ def check_params():
 
 def execute(args):
     if parse_command(args) is False:
-        raise Exception('parse command error...')
+        raise Exception('parse command error...usage help')
     if check_params() is False:
         raise Exception('required parameter missing...')
     if config.BUILD and build_push() is False:
@@ -162,7 +162,7 @@ def main():
     status = True
 
     execute(argv)
-    
+
     project = config.IMAGE_NAME.split('/')[1]
     if not config.NO_SEND and (config.BUILD or config.RUN):
         send_message(project, status)
