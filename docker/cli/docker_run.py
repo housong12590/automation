@@ -12,6 +12,7 @@ def _ssh_login(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
         print(stdout.read().decode())
+        print(stderr.read().decode())
     client.close()
     return True
 
