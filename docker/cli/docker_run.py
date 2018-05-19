@@ -12,11 +12,9 @@ def _ssh_login(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
         stdout = stdout.read().decode()
-        if stdout:
-            print(stdout)
+        print(stdout)
         stderr = stderr.read().decode()
-        if stderr:
-            print(stderr)
+        print(stderr)
     client.close()
     return True
 
@@ -33,7 +31,6 @@ def run():
         re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
         'docker rmi -f {}:old'.format(IMAGE)
     ]
-    index = 0
     if config.ENABLE_REMOTE:
         return _ssh_login(commands)
     else:
