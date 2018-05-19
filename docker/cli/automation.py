@@ -116,10 +116,6 @@ def execute(args):
         raise Exception('parse command error...')
     if check_params() is False:
         raise Exception('required parameter missing...')
-    for i in dir(config):
-        if not i.startswith('__'):
-            value = getattr(config, i)
-            print(i, '=', value)
     if config.BUILD and build_push() is False:
         raise Exception('docker build fail...')
     if config.RUN and run() is False:
@@ -163,13 +159,10 @@ def main():
     elif 'remote' in argv:
         config.ENABLE_REMOTE = True
         argv.remove('remote')
-    print(argv)
     status = True
-    try:
-        execute(argv)
-    except Exception as e:
-        status = False
 
+    execute(argv)
+    
     project = config.IMAGE_NAME.split('/')[1]
     if not config.NO_SEND and (config.BUILD or config.RUN):
         send_message(project, status)

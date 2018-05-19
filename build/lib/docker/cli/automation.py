@@ -152,7 +152,8 @@ def push_build_result(project, status):
             'command': config.COMMAND
         }
         result = requests.post(url, data)
-        print(result.text)
+        if result.status_code != 200:
+            print('push build result error ' + url)
 
 
 def main():
@@ -168,6 +169,7 @@ def main():
         execute(argv)
     except Exception as e:
         status = False
+        print(e)
 
     project = config.IMAGE_NAME.split('/')[1]
     if not config.NO_SEND and (config.BUILD or config.RUN):

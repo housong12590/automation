@@ -4,12 +4,8 @@
     <list default="true" id="64305491-1d0b-4811-b1df-7e3b37a48c47" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/build/lib/docker/cli/automation.py" afterPath="$PROJECT_DIR$/build/lib/docker/cli/automation.py" />
-      <change beforePath="$PROJECT_DIR$/build/lib/docker/cli/docker_run.py" afterPath="$PROJECT_DIR$/build/lib/docker/cli/docker_run.py" />
-      <change beforePath="$PROJECT_DIR$/build/lib/docker/config.py" afterPath="$PROJECT_DIR$/build/lib/docker/config.py" />
-      <change beforePath="$PROJECT_DIR$/build/lib/notifiy/ding.py" afterPath="$PROJECT_DIR$/build/lib/notifiy/ding.py" />
       <change beforePath="$PROJECT_DIR$/dist/automation-1.2-py3.6.egg" afterPath="$PROJECT_DIR$/dist/automation-1.2-py3.6.egg" />
       <change beforePath="$PROJECT_DIR$/docker/cli/automation.py" afterPath="$PROJECT_DIR$/docker/cli/automation.py" />
-      <change beforePath="$PROJECT_DIR$/docker/config.py" afterPath="$PROJECT_DIR$/docker/config.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +25,8 @@
       <file leaf-file-name="automation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker/cli/automation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="155" column="51" lean-forward="true" selection-start-line="155" selection-start-column="51" selection-end-line="155" selection-end-column="51" />
+            <state relative-caret-position="563">
+              <caret line="163" column="17" lean-forward="true" selection-start-line="163" selection-start-column="17" selection-end-line="163" selection-end-column="17" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -333,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526713073704</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="123123">
+      <created>1526717325196</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1526717325196</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -559,8 +562,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker/cli/automation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="155" column="51" lean-forward="true" selection-start-line="155" selection-start-column="51" selection-end-line="155" selection-end-column="51" />
+        <state relative-caret-position="563">
+          <caret line="163" column="17" lean-forward="true" selection-start-line="163" selection-start-column="17" selection-end-line="163" selection-end-column="17" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
