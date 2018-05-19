@@ -8,6 +8,8 @@ def _ssh_login(commands):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(config.RUN_HOST, 22, username=config.RUN_USER, password=config.RUN_PASSWORD, timeout=20)
+    stdin, stdout, stderr = client.exec_command('docker images')
+    print(stdout.read().decode())
     for index, cmd in enumerate(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
