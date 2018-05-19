@@ -53,7 +53,6 @@ def parse_command(argv):
     try:
         opts, args = getopt.getopt(argv, short_args, long_args)
         for opt, value in opts:
-            print(opt, value)
             if opt in ('-i', '--image'):
                 config.IMAGE_NAME = value
             elif opt in ('-f', '--dockerfile'):
@@ -99,6 +98,7 @@ def get_image_name():
         regexp = r' ([\w|\.]*?/\w+?/\w+)'
         result = re.findall(regexp, config.COMMAND)
         result = result[len(result) - 1]
+        print(result)
         return result.split('/', maxsplit=1)[1]
     except Exception:
         raise ValueError('not find image name usage -i --image --cmd')
