@@ -8,15 +8,15 @@ def _ssh_login(commands):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(config.RUN_HOST, 22, username=config.RUN_USER, password=config.RUN_PASSWORD, timeout=20)
-    index = 0
     for cmd in commands:
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
-        print(stdout.read().decode())
-        if index == 5 and not re.match(r'\w+', stdout.read().decode()):
-            print(stderr.read().decode())
-            return False
-        index = index + 1
+        stdout = stdout.read().decode()
+        if stdout:
+            print(stdout)
+        stderr = stderr.read().decode()
+        if stderr:
+            print(stderr)
     client.close()
     return True
 
@@ -40,7 +40,7 @@ def run():
         for cmd in commands:
             print(cmd)
             result = run_command(cmd)
-            if index == 5 and result is False:
-                return False
-            index = index + 1
+            # if index == 5 and result is False:
+            #     return False
+            # index = index + 1
         return True
