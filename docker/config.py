@@ -21,8 +21,8 @@ IMAGE_NAME = None
 
 DOCKER_FILE = '.'
 
-# COMMAND = None
-COMMAND = 'docker run -d --name coasts -p 3306:3306 192.168.0.210/haiwei/coasts:2018'
+COMMAND = None
+# COMMAND = 'docker run -d --name test -p 9096:5000 registry.jiankanghao.net/public/test'
 
 BUILD = False
 
