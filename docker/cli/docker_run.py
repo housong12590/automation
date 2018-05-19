@@ -3,8 +3,6 @@ import paramiko
 import re
 from .command import run_command
 
-IMAGE = '{}/{}'.format(config.REGISTRY, config.IMAGE_NAME)
-
 
 def _ssh_login(commands):
     client = paramiko.SSHClient()
@@ -21,6 +19,7 @@ def _ssh_login(commands):
 
 
 def run():
+    IMAGE = '{}/{}'.format(config.REGISTRY, config.IMAGE_NAME)
     container_name = config.IMAGE_NAME.split('/')[1]
     commands = [
         'docker login {} -u {} -p {}'.format(config.REGISTRY, config.REGISTRY_USER, config.REGISTRY_PASSWORD),

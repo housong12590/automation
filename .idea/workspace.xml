@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="64305491-1d0b-4811-b1df-7e3b37a48c47" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/lib/docker/cli/automation.py" afterPath="$PROJECT_DIR$/build/lib/docker/cli/automation.py" />
-      <change beforePath="$PROJECT_DIR$/build/lib/docker/config.py" afterPath="$PROJECT_DIR$/build/lib/docker/config.py" />
-      <change beforePath="$PROJECT_DIR$/dist/automation-1.2-py3.6.egg" afterPath="$PROJECT_DIR$/dist/automation-1.2-py3.6.egg" />
-      <change beforePath="$PROJECT_DIR$/docker/cli/automation.py" afterPath="$PROJECT_DIR$/docker/cli/automation.py" />
+      <change beforePath="$PROJECT_DIR$/docker/cli/docker_build.py" afterPath="$PROJECT_DIR$/docker/cli/docker_build.py" />
+      <change beforePath="$PROJECT_DIR$/docker/cli/docker_run.py" afterPath="$PROJECT_DIR$/docker/cli/docker_run.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="automation.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="automation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docker/cli/automation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+            <state relative-caret-position="500">
+              <caret line="120" column="32" lean-forward="false" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -58,8 +56,8 @@
       <file leaf-file-name="docker_build.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docker/cli/docker_build.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="102">
+              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docker_run.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="docker_run.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker/cli/docker_run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+            <state relative-caret-position="357">
+              <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -136,10 +134,11 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/notifiy/__init__.py" />
         <option value="$PROJECT_DIR$/notifiy/ding.py" />
-        <option value="$PROJECT_DIR$/docker/cli/docker_run.py" />
         <option value="$PROJECT_DIR$/test/command.py" />
         <option value="$PROJECT_DIR$/docker/config.py" />
         <option value="$PROJECT_DIR$/docker/cli/automation.py" />
+        <option value="$PROJECT_DIR$/docker/cli/docker_build.py" />
+        <option value="$PROJECT_DIR$/docker/cli/docker_run.py" />
       </list>
     </option>
   </component>
@@ -385,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526738970670</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="123123">
+      <created>1526739553848</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526739553848</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -565,26 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker/cli/docker_build.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker/cli/docker_run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/command.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -611,10 +597,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker/cli/automation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+        <state relative-caret-position="500">
+          <caret line="120" column="32" lean-forward="false" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/cli/docker_build.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/cli/docker_run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
