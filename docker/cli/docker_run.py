@@ -19,7 +19,6 @@ def _ssh_login(commands):
 
 
 def run():
-    print('start run.......')
     IMAGE = '{}/{}'.format(config.REGISTRY, config.IMAGE_NAME)
     container_name = config.IMAGE_NAME.split('/')[1]
     commands = [
@@ -31,6 +30,7 @@ def run():
         re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
         'docker rmi -f {}:old'.format(IMAGE)
     ]
+    print(commands)
     return True
     # if config.ENABLE_REMOTE:
     #     print('start ssh login...')
