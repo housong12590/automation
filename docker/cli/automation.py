@@ -40,6 +40,9 @@ remote 在远端主机运行容器 中间要借助barbor中间件 ,默认是以�
 运行示例:
 automation remote -br --cmd="docker run -d --name coasts -p 8086:5000 192.168.0.210/haiwei/coasts"
 构建镜像并运行在远端主机
+
+automation remote -br --outer-net -h 123.207.152.86 -u root -p pss123546 --cmd="docker run -d --name test -p 9096:5000 registry.jiankanghao.net/public/test"
+
 """
 
 
@@ -50,6 +53,7 @@ def parse_command(argv):
     try:
         opts, args = getopt.getopt(argv, short_args, long_args)
         for opt, value in opts:
+            print(opt, value)
             if opt in ('-i', '--image'):
                 config.IMAGE_NAME = value
             elif opt in ('-f', '--dockerfile'):
@@ -112,6 +116,10 @@ def execute(args):
         raise Exception('parse command error...')
     if check_params() is False:
         raise Exception('required parameter missing...')
+    for i in dir(config):
+        if not i.startswith('__'):
+            value = getattr(config, i)
+            print(i, '=', value)
     if config.BUILD and build_push() is False:
         raise Exception('docker build fail...')
     if config.RUN and run() is False:
@@ -133,7 +141,7 @@ def send_message(project, result):
 
 
 def push_build_result(project, status):
-    url = config.SERVER_HOST + 'build'
+    url = config.SERVER_HOST + 'build/record'
     space_name = config.IMAGE_NAME.split('/')[0]
     if space_name in config.REGISTRY_SPACE:
         data = {
@@ -144,7 +152,8 @@ def push_build_result(project, status):
             'command': config.COMMAND
         }
         result = requests.post(url, data)
-        print(result.text)
+        if result.status_code != 200:
+            print('push build result error ' + url)
 
 
 def main():
@@ -153,8 +162,8 @@ def main():
         usage()
     elif 'remote' in argv:
         config.ENABLE_REMOTE = True
-        argv = sys.argv[1:]
-
+        argv.remove('remote')
+    print(argv)
     status = True
     try:
         execute(argv)

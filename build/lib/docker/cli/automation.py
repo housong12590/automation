@@ -3,12 +3,13 @@ import getopt
 import sys
 import os
 import re
+import requests
 from docker import config
 from .docker_build import build_push
 from .docker_run import run
 from notifiy import send
 
-help = """
+help_info = """
 help 帮助信息
 -i --image 镜像名称 可以不指定(如果没有该选项则去docker run命令里面获取)
 -f --dockerfile dockerfile文件所在位置,默认在项目根目录下,可以使用相对路径.或者..的方式
@@ -20,18 +21,28 @@ help 帮助信息
 
 --cmd 运行容器所需的命令 可以设置多个cmd命令,会依次执行 如果只是执行build操作,可以不指定
 
--h --host 项目部署的主机(默认 192.168.0.212)
--u --user 远端主机的登录用户名(默认 root)
--p --password 远端主机的登录密码(默认 123456)
+remote 在远端主机运行容器 中间要借助barbor中间件 ,默认是以本机的方式运行
+
+-h --host 远端主机ip (默认 192.168.0.212)
+-u --user 远端主机登录用户名(默认 root)
+-p --password 远端服务器登录密码(默认 123456)
 
 -n --notify 通知方式目前有两种通知邮件(mail)和钉钉(ding) 默认为钉钉通知
 通知方式://通知的用户
 示例: mail://304536797@qq.com,452945447@qq.com 
-如果有多个以逗号分号, 钉钉通知填写token即可
+如果有多个通知用户以逗号分开, 钉钉通知填写token即可
 
 --no-send 不发送通知 如果没有build或者run 也不会发送通知
 
---outer-net 在外网环境下 pull 或者push 镜像, 默认是使用局域网ip, 外网使用registry.jiankanghao.net
+--outer-net 在外网环境下 pull 或者push 镜像, 默认是使用局域网ip 192.168.0.210, 外网使用registry.jiankanghao.net
+
+
+运行示例:
+automation remote -br --cmd="docker run -d --name coasts -p 8086:5000 192.168.0.210/haiwei/coasts"
+构建镜像并运行在远端主机
+
+automation remote -br --outer-net -h 123.207.152.86 -u root -p pss123546 --cmd="docker run -d --name test -p 9096:5000 registry.jiankanghao.net/public/test"
+
 """
 
 
@@ -42,6 +53,7 @@ def parse_command(argv):
     try:
         opts, args = getopt.getopt(argv, short_args, long_args)
         for opt, value in opts:
+            print(opt, value)
             if opt in ('-i', '--image'):
                 config.IMAGE_NAME = value
             elif opt in ('-f', '--dockerfile'):
@@ -104,40 +116,65 @@ def execute(args):
         raise Exception('parse command error...')
     if check_params() is False:
         raise Exception('required parameter missing...')
+    for i in dir(config):
+        if not i.startswith('__'):
+            value = getattr(config, i)
+            print(i, '=', value)
     if config.BUILD and build_push() is False:
         raise Exception('docker build fail...')
     if config.RUN and run() is False:
         raise Exception('docker run fail...')
 
 
-def main():
-    argv = sys.argv[1:]
-    if 'help' in argv:
-        usage()
-    else:
-        status = True
-        try:
-            execute(argv)
-        except Exception as e:
-            status = False
-        if not config.NO_SEND and (config.BUILD or config.RUN):
-            send_message(status)
-        send_message(status)
-
-
 def usage():
-    print(help)
+    print(help_info)
     sys.exit(1)
 
 
-def send_message(result):
+def send_message(project, result):
     if result:
         result = 'success'
     else:
         result = 'fail'
     msg = config.REGISTRY + '/' + config.IMAGE_NAME + ':' + config.IMAGE_TAG
-    project = config.IMAGE_NAME.split('/')[1]
     send('构建通知  %s...%s' % (project, result), msg)
+
+
+def push_build_result(project, status):
+    url = config.SERVER_HOST + 'build/record'
+    space_name = config.IMAGE_NAME.split('/')[0]
+    if space_name in config.REGISTRY_SPACE:
+        data = {
+            'name': project,
+            'tag': config.IMAGE_TAG,
+            'branch': git_branch(),
+            'status': status,
+            'command': config.COMMAND
+        }
+        result = requests.post(url, data)
+        print(result.text)
+
+
+def main():
+    argv = sys.argv[1:]
+    if 'help' in argv:
+        usage()
+    elif 'remote' in argv:
+        config.ENABLE_REMOTE = True
+        argv.remove('remote')
+    print(argv)
+    status = True
+    try:
+        execute(argv)
+    except Exception as e:
+        status = False
+
+    project = config.IMAGE_NAME.split('/')[1]
+    if not config.NO_SEND and (config.BUILD or config.RUN):
+        send_message(project, status)
+
+    if config.BUILD:
+        push_build_result(project, status)
 
 
 if __name__ == '__main__':

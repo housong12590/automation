@@ -3,8 +3,6 @@ import requests
 import json
 from docker import config
 
-host = 'http://123.207.152.86:8023/'
-
 
 class Ding(Base):
 
@@ -30,7 +28,7 @@ class Ding(Base):
     def make_message(self, subject, msg):
         try:
             project = config.IMAGE_NAME.split('/')[1]
-            msg_url = host + "build/{}/{}".format(project, config.IMAGE_TAG)
+            msg_url = config.SERVER_HOST + "build/{}/{}".format(project, config.IMAGE_TAG)
             # msg_url = host + "build/index"
             return {
                 "msgtype": "link",

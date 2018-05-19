@@ -17,7 +17,7 @@ RUN_PASSWORD = '123456'
 
 IMAGE_TAG = datetime.datetime.now().strftime("%Y%m%d%H%S%M")
 
-IMAGE_NAME = 'haiwei/coasts'
+IMAGE_NAME = None
 
 DOCKER_FILE = '.'
 
