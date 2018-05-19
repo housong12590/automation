@@ -7,12 +7,11 @@ from .command import run_command
 def _ssh_login(commands):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(config.RUN_HOST, 22, username=config.RUN_USER, password=config.RUN_PASSWORD)
+    client.connect(config.RUN_HOST, 22, username=config.RUN_USER, password=config.RUN_PASSWORD, timeout=20)
     for index, cmd in enumerate(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
         if index == 5 and stderr:
-            print(stderr.read())
             return False
     client.close()
     return True
@@ -30,16 +29,12 @@ def run():
         re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
         'docker rmi -f {}:old'.format(IMAGE)
     ]
-    print(commands)
-    return True
-    # if config.ENABLE_REMOTE:
-    #     print('start ssh login...')
-    #     return _ssh_login(commands)
-    # else:
-    #     print('exec command...')
-    #     for index, cmd in enumerate(commands):
-    #         print(cmd)
-    #         result = run_command(cmd)
-    #         if index == 5 and result is False:
-    #             return False
-    #     return True
+    if config.ENABLE_REMOTE:
+        return _ssh_login(commands)
+    else:
+        for index, cmd in enumerate(commands):
+            print(cmd)
+            result = run_command(cmd)
+            if index == 5 and result is False:
+                return False
+        return True

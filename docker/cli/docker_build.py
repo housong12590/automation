@@ -15,5 +15,4 @@ def build_push():
     for cmd in commands:
         if run_command(cmd) is False:
             return False
-    print('build_push wancheng')
     return True
