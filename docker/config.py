@@ -6,9 +6,6 @@ passwd = 'szwkidhsrznxbjbi'
 
 ENABLE_REMOTE = False
 
-# 默认钉钉通知使用的token
-DING_TOKEN = '9d6da20b7e3e596c660b5b6379a2e10f962b823d076c11bbfea3f393bfdcb1cd'
-
 RUN_HOST = '192.168.0.212'
 
 RUN_USER = 'root'
@@ -28,7 +25,7 @@ BUILD = False
 
 RUN = False
 
-NOTIFY = 'ding//9d6da20b7e3e596c660b5b6379a2e10f962b823d076c11bbfea3f393bfdcb1cd'
+NOTIFY = 'ding//d5bd95ab90a2febd06dd3ce9ba7b6d18a0c9cd086d344c63fc069f624dd65afc'
 
 NO_SEND = False
 
