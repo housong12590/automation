@@ -63,7 +63,7 @@ def parse_command(argv):
             elif opt in ('-p', '--password'):
                 config.RUN_PASSWORD = value
             elif opt == '--cmd':
-                config.COMMAND = re.sub(r'(-[vpe])', r'\\\n\1', value)
+                config.COMMAND = value
             elif opt == '-b':
                 config.BUILD = True
             elif opt == '-r':
@@ -143,7 +143,7 @@ def push_build_result(project, status):
             'tag': config.IMAGE_TAG,
             'branch': git_branch(),
             'status': status,
-            'command': config.COMMAND
+            'command': re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', ''))
         }
         result = requests.post(url, data)
         if result.status_code != 200:
