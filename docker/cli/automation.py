@@ -39,16 +39,13 @@ remote 在远端主机运行容器 中间要借助barbor中间件 ,默认是以�
 
 运行示例:
 automation remote -br --cmd="docker run -d --name coasts -p 8086:5000 192.168.0.210/haiwei/coasts"
-构建镜像并运行在远端主机
-
-automation remote -br --outer-net -h 123.207.152.86 -u root -p pss123546 --cmd="docker run -d --name test -p 9096:5000 registry.jiankanghao.net/public/test"
-
 """
 
 
 def parse_command(argv):
     short_args = 'bri:f:t:h:u:p:n:'
-    long_args = ['image=', 'dockerfile=', 'tag=', 'host=', 'user=', 'password=', 'cmd=', 'no-send', 'outer-net',
+    long_args = ['image=', 'dockerfile=', 'tag=', 'host=', 'user=', 'password=', 'cmd=', 'no-send',
+                 'outer-net',
                  'notify']
     try:
         opts, args = getopt.getopt(argv, short_args, long_args)
@@ -66,7 +63,7 @@ def parse_command(argv):
             elif opt in ('-p', '--password'):
                 config.RUN_PASSWORD = value
             elif opt == '--cmd':
-                config.COMMAND = value
+                config.COMMAND = re.sub(r'(-[vpe])', r'\\\n\1', value)
             elif opt == '-b':
                 config.BUILD = True
             elif opt == '-r':
