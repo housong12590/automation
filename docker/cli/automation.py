@@ -8,6 +8,7 @@ from docker import config
 from .docker_build import build_push
 from .docker_run import run
 from notifiy import send
+import io
 
 help_info = """
 help 帮助信息
@@ -134,16 +135,53 @@ def send_message(project, result):
     send('构建通知  %s...%s' % (project, result), msg)
 
 
+def get_port():
+    results = re.findall(r'-p.*:(\d+?)\s', config.COMMAND)
+    port = None
+    if len(results) != 0:
+        port = results[0]
+    return open(port)
+
+
+def get_host():
+    results = re.findall(r'-p\s+(\d+?):', config.COMMAND)
+    if len(results) != 0:
+        port = results[0]
+        return '{}:{}'.format(config.RUN_HOST, port)
+    return None
+
+
+def get_dockerfile_content():
+    file = None
+    try:
+        path = os.path.abspath(os.path.join(config.DOCKER_FILE, 'Dockerfile'))
+        file = io.open(path, 'r', encoding='utf8')
+        content = file.read()
+    except FileNotFoundError:
+        content = ''
+    finally:
+        if file:
+            file.close()
+    return content
+
+
 def push_build_result(project, status):
     url = config.SERVER_HOST + 'build/record'
     space_name = config.IMAGE_NAME.split('/')[0]
     if space_name in config.REGISTRY_SPACE:
+
         data = {
             'name': project,
             'tag': config.IMAGE_TAG,
             'branch': git_branch(),
             'status': status,
-            'command': re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', ''))
+            'command': re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
+            'host': get_host(),
+            'port': get_port(),
+            'dockerfile': get_dockerfile_content(),
+            'image_name': config.IMAGE_NAME,
+            'notify': config.NOTIFY,
+            'isSend': not config.NO_SEND
         }
         result = requests.post(url, data)
         if result.status_code != 200:

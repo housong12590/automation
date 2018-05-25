@@ -19,7 +19,6 @@ IMAGE_NAME = None
 DOCKER_FILE = '.'
 
 COMMAND = None
-# COMMAND = 'docker run -d --name test -p 9096:5000 registry.jiankanghao.net/public/test'
 
 BUILD = False
 
