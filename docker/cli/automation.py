@@ -140,7 +140,7 @@ def get_port():
     port = None
     if len(results) != 0:
         port = results[0]
-    return open(port)
+    return port
 
 
 def get_host():
