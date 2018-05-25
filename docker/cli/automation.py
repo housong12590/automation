@@ -165,6 +165,15 @@ def get_dockerfile_content():
     return content
 
 
+def code_registry():
+    try:
+        git_addr = os.popen('git remote -v')
+        result = re.findall(r'origin\s+(.*?)\s', git_addr.read())
+        return result[0]
+    except Exception:
+        return None
+
+
 def push_build_result(project, status):
     url = config.SERVER_HOST + 'build/record'
     space_name = config.IMAGE_NAME.split('/')[0]
@@ -181,7 +190,8 @@ def push_build_result(project, status):
             'dockerfile': get_dockerfile_content(),
             'image_name': config.IMAGE_NAME,
             'notify': config.NOTIFY,
-            'send': not config.NO_SEND
+            'send': not config.NO_SEND,
+            'code_registry': code_registry()
         }
         result = requests.post(url, data)
         if result.status_code != 200:
