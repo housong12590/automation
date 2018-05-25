@@ -181,7 +181,7 @@ def push_build_result(project, status):
             'dockerfile': get_dockerfile_content(),
             'image_name': config.IMAGE_NAME,
             'notify': config.NOTIFY,
-            'isSend': not config.NO_SEND
+            'send': not config.NO_SEND
         }
         result = requests.post(url, data)
         if result.status_code != 200:
