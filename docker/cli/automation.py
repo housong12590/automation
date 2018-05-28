@@ -85,10 +85,11 @@ def parse_command(argv):
 def git_branch():
     git_last_log = os.popen('git log -1 --graph --decorate').read()
     branch = re.findall(r'origin/(.*?)\)', git_last_log)
-    if len(branch) == 0:
-        return None
-    else:
-        return branch[0]
+    message = re.findall(r'\s{5}(.*?)\n', git_last_log)
+    try:
+        return branch[0], message[0]
+    except IndexError:
+        return None, None
 
 
 def get_image_name():
@@ -178,11 +179,12 @@ def push_build_result(project, status):
     url = config.SERVER_HOST + 'build/record'
     space_name = config.IMAGE_NAME.split('/')[0]
     if space_name in config.REGISTRY_SPACE:
-
+        branch, message = git_branch()
         data = {
             'name': project,
             'tag': config.IMAGE_TAG,
-            'branch': git_branch(),
+            'branch': branch,
+            'message': message,
             'status': status,
             'command': re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
             'host': get_host(),
