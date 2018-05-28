@@ -127,12 +127,13 @@ def usage():
     sys.exit(1)
 
 
-def send_message(project, result):
+def send_message(project, result, msg=None):
     if result:
         result = 'success'
     else:
         result = 'fail'
-    msg = config.REGISTRY + '/' + config.IMAGE_NAME + ':' + config.IMAGE_TAG
+    if msg is None:
+        msg = config.REGISTRY + '/' + config.IMAGE_NAME + ':' + config.IMAGE_TAG
     send('构建通知  %s...%s' % (project, result), msg)
 
 
@@ -212,7 +213,7 @@ def main():
     try:
         execute(argv)
     except Exception as e:
-        send_message(e.args, 'fail')
+        send_message(config.PROJECT, 'fail', e.args)
         print(e.args)
         exit(1)
 
