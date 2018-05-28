@@ -11,7 +11,6 @@ def _ssh_login(commands):
                    timeout=20)
     run_status = True
     for cmd in commands:
-        print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
         stdout = stdout.read().decode()
         print(stdout)
@@ -19,7 +18,6 @@ def _ssh_login(commands):
         print(stderr)
         if run_status:
             run_status = is_run_status(cmd, stderr)
-        print('run status', run_status)
     client.close()
     return run_status
 
@@ -42,7 +40,6 @@ def run():
     else:
         run_status = True
         for cmd in commands:
-            print(cmd)
             result = run_command(cmd)
             if run_status:
                 run_status = is_run_status(cmd, result)
