@@ -75,7 +75,6 @@ def parse_command(argv):
                 config.ON_SEND = True
             elif opt == '--outer-net':
                 config.OUTER_NET = True
-
     except getopt.GetoptError:
         usage()
         return False
@@ -109,6 +108,7 @@ def check_params():
         return False
     if config.IMAGE_NAME is None:
         config.IMAGE_NAME = get_image_name()
+        config.PROJECT = config.IMAGE_NAME.split('/')[1]
 
 
 def execute(args):
@@ -209,18 +209,22 @@ def main():
         argv.remove('remote')
     status = True
 
-    execute(argv)
+    try:
+        execute(argv)
+    except Exception as e:
+        send_message(e.args, 'fail')
+        print(e.args)
+        exit(1)
 
-    project = config.IMAGE_NAME.split('/')[1]
     try:
         if not config.NO_SEND and (config.BUILD or config.RUN):
-            send_message(project, status)
+            send_message(config.PROJECT, status)
     except Exception:
         print('发送通知消息失败')
 
     try:
         if config.BUILD:
-            push_build_result(project, status)
+            push_build_result(config.PROJECT, status)
     except Exception:
         print('请求接口失败')
 

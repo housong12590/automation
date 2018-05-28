@@ -30,6 +30,8 @@ NO_SEND = False
 
 OUTER_NET = False
 
+PROJECT = None
+
 REGISTRY = 'registry.jiankanghao.net' if OUTER_NET else '192.168.0.210'
 
 REGISTRY_USER = '304536797@qq.com'
