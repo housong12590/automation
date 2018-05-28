@@ -49,7 +49,6 @@ def run():
 def check_run_status(cmd, stderror):
     run_status = True
     if re.match(r'^\s*docker run ', cmd):
-        print(stderror)
         if re.match(r'^docker: Error response from daemon:', stderror):
             run_status = False
     return run_status
