@@ -212,11 +212,17 @@ def main():
     execute(argv)
 
     project = config.IMAGE_NAME.split('/')[1]
-    if not config.NO_SEND and (config.BUILD or config.RUN):
-        send_message(project, status)
+    try:
+        if not config.NO_SEND and (config.BUILD or config.RUN):
+            send_message(project, status)
+    except Exception:
+        print('发送通知消息失败')
 
-    if config.BUILD:
-        push_build_result(project, status)
+    try:
+        if config.BUILD:
+            push_build_result(project, status)
+    except Exception:
+        print('请求接口失败')
 
 
 if __name__ == '__main__':
