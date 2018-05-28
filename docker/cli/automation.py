@@ -213,7 +213,7 @@ def main():
     try:
         execute(argv)
     except Exception as e:
-        send_message(config.PROJECT, 'fail', e.args)
+        send_message(config.PROJECT, False, e.args)
         print(e.args)
         exit(1)
 
