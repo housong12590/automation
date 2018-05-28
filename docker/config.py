@@ -12,7 +12,7 @@ RUN_USER = 'root'
 
 RUN_PASSWORD = '123456'
 
-IMAGE_TAG = datetime.datetime.now().strftime("%Y%m%d%H%S%M")
+IMAGE_TAG = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 IMAGE_NAME = None
 
