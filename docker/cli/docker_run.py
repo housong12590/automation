@@ -14,10 +14,11 @@ def _ssh_login(commands):
         print(cmd)
         stdin, stdout, stderr = client.exec_command(cmd)
         stdout = stdout.read().decode()
-        print('stdout', stdout)
+        print(stdout)
         stderr = stderr.read().decode()
-        print('stderr', stderr)
-        run_status = is_run_status(cmd, stderr)
+        print(stderr)
+        if run_status:
+            run_status = is_run_status(cmd, stderr)
         print('run status', run_status)
     client.close()
     return run_status
@@ -43,13 +44,13 @@ def run():
         for cmd in commands:
             print(cmd)
             result = run_command(cmd)
-            run_status = is_run_status(cmd, result)
+            if run_status:
+                run_status = is_run_status(cmd, result)
         return run_status
 
 
 def is_run_status(cmd, stderror):
     run_status = True
-    print('is_run_status')
     if re.match(r'^\s*docker run ', cmd):
         print(stderror)
         if re.match(r'^docker: Error response from daemon:', stderror):
