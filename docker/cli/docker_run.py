@@ -17,7 +17,7 @@ def _ssh_login(commands):
         stderr = stderr.read().decode()
         print(stderr)
         if run_status:
-            run_status = is_run_status(cmd, stderr)
+            run_status = check_run_status(cmd, stderr)
     client.close()
     return run_status
 
@@ -42,11 +42,11 @@ def run():
         for cmd in commands:
             result = run_command(cmd)
             if run_status:
-                run_status = is_run_status(cmd, result)
+                run_status = check_run_status(cmd, result)
         return run_status
 
 
-def is_run_status(cmd, stderror):
+def check_run_status(cmd, stderror):
     run_status = True
     if re.match(r'^\s*docker run ', cmd):
         print(stderror)
