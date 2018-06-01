@@ -196,6 +196,7 @@ def push_build_result(project, status):
             'send': not config.NO_SEND,
             'code_registry': code_registry()
         }
+        print(data)
         result = requests.post(url, data)
         if result.status_code != 200:
             print('push build result error ' + url)
