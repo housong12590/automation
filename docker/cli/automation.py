@@ -9,6 +9,7 @@ from .docker_build import build_push
 from .docker_run import run
 from notifiy import send
 import io
+import json
 
 help_info = """
 help 帮助信息
@@ -196,7 +197,10 @@ def push_build_result(project, status):
             'send': not config.NO_SEND,
             'code_registry': code_registry()
         }
-        print(data)
+        try:
+            print(json.dumps(data, ensure_ascii=False, indent=4))
+        except Exception:
+            print('print request message error')
         result = requests.post(url, data)
         if result.status_code != 200:
             print('push build result error ' + url)
