@@ -198,7 +198,7 @@ def push_build_result(project, status):
             'code_registry': code_registry()
         }
         try:
-            print(json.dumps(data, ensure_ascii=False, indent=4))
+            print(json.dumps(data))
         except Exception:
             print('print request message error')
         result = requests.post(url, data)
