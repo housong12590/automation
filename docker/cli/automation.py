@@ -223,16 +223,16 @@ def main():
         exit(1)
 
     try:
-        if not config.NO_SEND and (config.BUILD or config.RUN):
+        if config.NO_SEND is False and (config.BUILD or config.RUN):
             send_message(config.PROJECT, status)
-    except Exception:
-        print('发送通知消息失败')
+    except Exception as e:
+        print('发送通知消息失败', e.args)
 
     try:
-        if config.BUILD:
+        if config.NO_SEND is False and config.BUILD:
             push_build_result(config.PROJECT, status)
-    except Exception:
-        print('请求接口失败')
+    except Exception as e:
+        print('请求接口失败', e.args)
 
 
 if __name__ == '__main__':
