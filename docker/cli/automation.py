@@ -228,7 +228,7 @@ def main():
         if config.NO_SEND is False and config.BUILD:
             push_build_result(config.PROJECT, status)
     except Exception as e:
-        print('请求接口失败', e.args)
+        print('请求接口失败')
 
 
 if __name__ == '__main__':
