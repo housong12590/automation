@@ -34,9 +34,9 @@ PROJECT = None
 
 REGISTRY = 'registry.jiankanghao.net' if OUTER_NET else '192.168.0.210'
 
-REGISTRY_USER = '304536797@qq.com'
+REGISTRY_USER = ''
 
-REGISTRY_PASSWORD = 'Pss123546'
+REGISTRY_PASSWORD = ''
 
 REGISTRY_SPACE = ['haiwei', 'public']
 

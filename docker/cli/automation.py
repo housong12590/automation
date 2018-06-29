@@ -47,8 +47,7 @@ automation remote -br --cmd="docker run -d --name coasts -p 8086:5000 192.168.0.
 def parse_command(argv):
     short_args = 'bri:f:t:h:u:p:n:'
     long_args = ['image=', 'dockerfile=', 'tag=', 'host=', 'user=', 'password=', 'cmd=', 'no-send',
-                 'outer-net',
-                 'notify']
+                 'outer-net', 'notify', 'registry_user=', 'registry_pwd=']
     try:
         opts, args = getopt.getopt(argv, short_args, long_args)
         for opt, value in opts:
@@ -76,6 +75,10 @@ def parse_command(argv):
                 config.ON_SEND = True
             elif opt == '--outer-net':
                 config.OUTER_NET = True
+            elif opt == '--registry_user':
+                config.REGISTRY_USER = value
+            elif opt == '--registry_pwd':
+                config.REGISTRY_PASSWORD = value
     except getopt.GetoptError:
         usage()
         return False
