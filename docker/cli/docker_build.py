@@ -3,7 +3,7 @@ from .command import run_command
 
 
 def build_push():
-    IMAGE = '{}/{}'.format(config.REGISTRY, config.IMAGE_NAME)
+    IMAGE = '{}/{}'.format(config.REGISTRY, config.PULL_ADDRESS)
     commands = [
         'docker login {} -u {} -p {}'.format(config.REGISTRY, config.REGISTRY_USER, config.REGISTRY_PASSWORD),
         'docker build -t {0}:{1} {2}'.format(IMAGE, config.IMAGE_TAG, config.DOCKER_FILE),

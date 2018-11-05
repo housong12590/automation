@@ -52,7 +52,7 @@ def parse_command(argv):
         opts, args = getopt.getopt(argv, short_args, long_args)
         for opt, value in opts:
             if opt in ('-i', '--image'):
-                config.IMAGE_NAME = value
+                config.PULL_ADDRESS = value
             elif opt in ('-f', '--dockerfile'):
                 config.DOCKER_FILE = value
             elif opt in ('-t', '--tag'):
@@ -110,9 +110,9 @@ def get_image_name():
 def check_params():
     if config.RUN and config.COMMAND is None:
         return False
-    if config.IMAGE_NAME is None:
-        config.IMAGE_NAME = get_image_name()
-        config.PROJECT = config.IMAGE_NAME.split('/')[1]
+    if config.PULL_ADDRESS is None:
+        config.PULL_ADDRESS = get_image_name()
+        config.IMAGE_NAME = config.PULL_ADDRESS.split('/')[1]
 
 
 def execute(args):
@@ -137,7 +137,7 @@ def send_message(project, result, msg=None):
     else:
         result = 'fail'
     if msg is None:
-        msg = config.REGISTRY + '/' + config.IMAGE_NAME + ':' + config.IMAGE_TAG
+        msg = config.REGISTRY + '/' + config.PULL_ADDRESS + ':' + config.IMAGE_TAG
     send('构建通知  %s...%s' % (project, result), msg)
 
 
@@ -180,22 +180,22 @@ def code_registry():
         return None
 
 
-def push_build_result(project, status):
+def push_build_result(image_name, status):
     url = config.SERVER_HOST + 'build/record'
-    space_name = config.IMAGE_NAME.split('/')[0]
+    space_name = config.PULL_ADDRESS.split('/')[0]
     if space_name in config.REGISTRY_SPACE:
         branch, message = git_branch()
         data = {
-            'name': project,
-            'tag': config.IMAGE_TAG,
-            'branch': branch,
-            'message': message,
+            'image_name': image_name,
+            'image_tag': config.IMAGE_TAG,
+            'git_branch': branch,
+            'git_message': message,
             'status': status,
             'command': re.sub(r"\s{2,}", " ", config.COMMAND.replace('\\', '')),
             'host': get_host(),
             'port': get_port(),
             'dockerfile': get_dockerfile_content(),
-            'image_name': config.IMAGE_NAME,
+            'pull_address': config.PULL_ADDRESS,
             'notify': config.NOTIFY,
             'send': not config.NO_SEND,
             'code_registry': code_registry()
@@ -217,19 +217,19 @@ def main():
     try:
         execute(argv)
     except Exception as e:
-        send_message(config.PROJECT, False, e.args)
+        send_message(config.IMAGE_NAME, False, e.args)
         print(e.args)
         exit(1)
 
     try:
         if config.NO_SEND is False and (config.BUILD or config.RUN):
-            send_message(config.PROJECT, status)
+            send_message(config.IMAGE_NAME, status)
     except Exception as e:
         print('发送通知消息失败', e.args)
 
     try:
         if config.NO_SEND is False and config.BUILD:
-            push_build_result(config.PROJECT, status)
+            push_build_result(config.IMAGE_NAME, status)
     except Exception as e:
         print('请求接口失败')
 
