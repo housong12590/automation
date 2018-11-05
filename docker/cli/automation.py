@@ -111,9 +111,8 @@ def check_params():
     if config.RUN and config.COMMAND is None:
         return False
     if config.PULL_ADDRESS is None:
-        name = get_image_name()
-        config.PULL_ADDRESS = '192.168.0.210/' + name + ':' + config.IMAGE_TAG
-        config.IMAGE_NAME = name.split('/')[1]
+        config.IMAGE_NAME = get_image_name()
+        config.PULL_ADDRESS = '192.168.0.210/' + config.IMAGE_NAME + ':' + config.IMAGE_TAG
 
 
 def execute(args):
@@ -187,7 +186,7 @@ def push_build_result(image_name, status):
     if space_name in config.REGISTRY_SPACE:
         branch, message = git_branch()
         data = {
-            'image_name': image_name,
+            'image_name': image_name.split('/')[1],
             'image_tag': config.IMAGE_TAG,
             'git_branch': branch,
             'git_message': message,
