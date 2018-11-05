@@ -181,7 +181,7 @@ def code_registry():
 
 
 def push_build_result(image_name, status):
-    url = config.SERVER_HOST + 'build/record'
+    url = config.SERVER_HOST + 'docker/push'
     space_name = config.PULL_ADDRESS.split('/')[0]
     if space_name in config.REGISTRY_SPACE:
         branch, message = git_branch()
