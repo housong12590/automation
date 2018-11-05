@@ -137,7 +137,7 @@ def send_message(project, result, msg=None):
     else:
         result = 'fail'
     if msg is None:
-        msg = config.REGISTRY + '/' + config.PULL_ADDRESS + ':' + config.IMAGE_TAG
+        msg = config.PULL_ADDRESS
     send('构建通知  %s...%s' % (project, result), msg)
 
 
