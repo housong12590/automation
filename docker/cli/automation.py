@@ -111,8 +111,8 @@ def check_params():
     if config.RUN and config.COMMAND is None:
         return False
     if config.PULL_ADDRESS is None:
-        config.PULL_ADDRESS = get_image_name()
         config.IMAGE_NAME = config.PULL_ADDRESS.split('/')[1]
+        config.PULL_ADDRESS = '192.168.0.210/' + get_image_name() + ':' + config.IMAGE_TAG
 
 
 def execute(args):
