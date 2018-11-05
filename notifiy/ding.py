@@ -27,7 +27,7 @@ class Ding(Base):
 
     def make_message(self, subject, msg):
         try:
-            project = config.PULL_ADDRESS.split('/')[1]
+            project = config.PULL_ADDRESS
             msg_url = config.SERVER_HOST + "build/{}/{}".format(project, config.IMAGE_TAG)
             # msg_url = host + "build/index"
             return {
