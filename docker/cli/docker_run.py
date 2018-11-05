@@ -24,7 +24,7 @@ def _ssh_login(commands):
 
 def run():
     IMAGE = '{}/{}'.format(config.REGISTRY, config.IMAGE_NAME)
-    container_name = config.PULL_ADDRESS.split('/')[1]
+    container_name = config.IMAGE_NAME.split('/')[1]
     commands = [
         'docker login {} -u {} -p {}'.format(config.REGISTRY, config.REGISTRY_USER,
                                              config.REGISTRY_PASSWORD),
