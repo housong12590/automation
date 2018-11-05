@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='automation',  # 应用名
-    version='1.2',  # 版本号
+    version='1.3',  # 版本号
     packages=find_packages(),
     entry_points={
         'console_scripts': [
