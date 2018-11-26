@@ -27,7 +27,7 @@ class Ding(Base):
 
     def make_message(self, subject, msg):
         try:
-            msg_url = config.SERVER_HOST + "docker/{}".format(config.IMAGE_TAG)
+            msg_url = config.SERVER_HOST + "docker/deploy/{}".format(config.IMAGE_NAME.split('/')[1])
             # msg_url = host + "build/index"
             return {
                 "msgtype": "link",
