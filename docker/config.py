@@ -40,5 +40,5 @@ REGISTRY_PASSWORD = ''
 
 REGISTRY_SPACE = ['haiwei', 'public']
 
-SERVER_HOST = 'http://123.207.152.86:8023/'
+SERVER_HOST = 'http://proxy.jiankanghao.net:50063/'
 # SERVER_HOST = 'http://192.168.0.212:8056/'
