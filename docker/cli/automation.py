@@ -97,7 +97,7 @@ def git_branch():
 
 def get_image_name():
     try:
-        regexp = r' ([\w|\.]*?/\w+?/\w+)'
+        regexp = r' ([\w|\.]*?/\w+?/[\w\-_]+)'
         result = re.findall(regexp, config.COMMAND)
         result = result[len(result) - 1]
         result = result.split('/')
